@@ -1,0 +1,40 @@
+.navbar {
+	margin-bottom: 0px;
+	border-radius: 0px;
+}
+
+.navbar-brand img {
+	max-height: 36px;
+}
+
+.navbar-container {
+	max-width: 1200px;
+	margin: 0px auto;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.navbar-brand {
+    padding: 7px 15px;
+    line-height: 35px;
+}
+
+.navbar-default {
+	background-color: #000;
+    border-color: #000;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav>li>a:focus{
+    color: #777;
+}
+
+ .navbar-default .navbar-nav>li>a:hover {
+ 	color: #777;	
+ }
+
+ .navbar-header {
+	min-width: 600px;
+ }
