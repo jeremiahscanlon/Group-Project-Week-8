@@ -1,3 +1,13 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#map {
+	height: 100%;
+}
+
 .navbar {
 	margin-bottom: 0px;
 	border-radius: 0px;
@@ -31,10 +41,38 @@
     color: #777;
 }
 
- .navbar-default .navbar-nav>li>a:hover {
- 	color: #777;	
- }
+.navbar-default .navbar-nav>li>a:hover {
+	color: #777;	
+}
 
- .navbar-header {
-	min-width: 600px;
- }
+.navbar-header {
+min-width: 600px;
+}
+
+#resultsList h2 {
+	font-size: 1em;
+	line-height: 1;
+	margin: 10px 0px;
+}
+
+#resultsList h2 a:hover, #resultsList h2 a:focus{
+	text-decoration: none;
+}
+
+#resultsList p {
+	font-size: 0.8em;
+	margin: 0 0 5px;
+}
+
+.searchResult {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.nopadding-right {
+	padding-right: 0px;
+}
+
+.nopadding-left {
+	padding-left: 0px;
+}

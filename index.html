@@ -4,7 +4,7 @@
 
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Job Find</title>
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
@@ -54,17 +54,20 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
-		<div class="row12 results">
-			<div class="col-md-4 col-sm-4" id="resultsList">
+	
+		<div class="row12 results" style="height:100%;">
+			<div class="col-md-4 col-sm-4">
+				<div id="resultsList"></div>
 			</div>			
-			<div class="col-md-8 col-sm-8">
-				
+			<div class="col-md-8 col-sm-8 nopadding-right" style="height:100%;">
+				<div id="map"></div>
 			</div>
 		</div>
-	</div>
+
 
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript" src="assets/js/testing.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw&libraries=places&callback=initMap"
+    async defer></script>
 </body>
 </html>
