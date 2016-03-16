@@ -84,7 +84,7 @@ $('seeResults').click(function(){
 });
 
 var home = 'New+Brunswick%2C+NJ';
-var keywords = 'node+full+stack+-python';
+var keywords = 'node';
 var searchLocation = "&l="+home;
 var searchKeyword = "&q="+keywords;
 
