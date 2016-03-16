@@ -1,6 +1,17 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	font-family: 'Open Sans', sans-serif;
+}
+
 .navbar {
 	margin-bottom: 0px;
 	border-radius: 0px;
+	position: fixed;
+	width: 100%;
+	height:70px;
 }
 
 .navbar-brand img {
@@ -31,10 +42,73 @@
     color: #777;
 }
 
- .navbar-default .navbar-nav>li>a:hover {
- 	color: #777;	
- }
+.navbar-default .navbar-nav>li>a:hover {
+	color: #777;	
+}
 
- .navbar-header {
+.navbar-header {
 	min-width: 600px;
- }
+}
+
+.results {
+	height: 100%;
+	padding-top: 70px;
+}
+
+.maparea {
+	height: 100%;
+}
+
+.resultsarea {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+#map {
+	height: 100%;
+}
+
+.searchHeader {
+	font-size:2em;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #d9d9d9;
+	margin-bottom: 10px;
+}
+
+#resultsList h2 {
+	font-size: 1em;
+	line-height: 1;
+	margin: 10px 0px;
+}
+
+#resultsList h2 a:hover, #resultsList h2 a:focus{
+	text-decoration: none;
+}
+
+#resultsList p {
+	font-size: 0.8em;
+	margin: 0 0 5px;
+}
+
+.searchResult {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #d9d9d9;
+}
+
+.nopadding-right {
+	padding-right: 0px;
+}
+
+.nopadding-left {
+	padding-left: 0px;
+}
+
+/*
+.indeed_link {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: 0;
+	vertical-align: bottom;
+}
+*/

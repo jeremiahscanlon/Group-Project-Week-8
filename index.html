@@ -4,15 +4,18 @@
 
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
 	<title>Job Find</title>
+	
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
-	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800,300' rel='stylesheet' type='text/css'>
-	<!-- Latest compiled and minified CSS & JS -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic|Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	
 
 </head>
 <body>
@@ -31,7 +34,7 @@
 					<a class="navbar-brand" href="#">
 						<!--<img alt="Logo" src="assets/images/logo.png">-->
 					</a>
-					<h1>Job Search</h1>
+					<h1>Nav Bar</h1>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -54,17 +57,48 @@
 			</div>
 		</div>
 	</nav>
-	<div class="container">
-		<div class="row12 results">
-			<div class="col-md-4 col-sm-4" id="resultsList">
-			</div>			
-			<div class="col-md-8 col-sm-8">
-				
-			</div>
+	
+	<div class="row12 results">
+		<div class="col-md-8 col-sm-8 nopadding-right nopadding-left maparea">
+			<div id="map"></div>
+		</div>
+		<div class="col-md-4 col-sm-4 resultsarea">
+			<div id="resultsList"></div>
 		</div>
 	</div>
+	
+	<div class="clearfix"></div>
 
+	<!--
+	<div id="indeed_link">
+        <a title="Job Search" href="http://www.indeed.com/" target="_new">jobs by <img alt="Indeed" src="http://www.indeed.com/p/jobsearch.gif" style="">
+        </a>
+    </div>
+	-->
+	
+	<!--
+	<div class="row12 results">
+		<div class="col-md-8 col-sm-8 nopadding-right" style="height:100%;">
+			<div id="map"></div>
+		</div>
+		<div class="col-md-4 col-sm-4">
+			<form class="form-inline">
+				<div class="form-group">
+					<input type="text" class="form-control" id="keywords" placeholder="Search Keyword(s)">
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" id="location" placeholder="City, State or Zip Code">
+				</div>
+				<button type="submit" class="btn btn-primary" id="seeResults">See Results</button>
+			</form>
+		</div>
+	</div>
+	-->
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw&libraries=places&callback=initMap"
+    async defer></script>
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<script type="text/javascript" src="assets/js/testing.js"></script>
+	
 </body>
 </html>
