@@ -1,17 +1,17 @@
 html, body {
 	height: 100%;
+	width: 100%;
 	margin: 0;
 	padding: 0;
 	font-family: 'Open Sans', sans-serif;
 }
 
-#map {
-	height: 100%;
-}
-
 .navbar {
 	margin-bottom: 0px;
 	border-radius: 0px;
+	position: fixed;
+	width: 100%;
+	height:70px;
 }
 
 .navbar-brand img {
@@ -52,6 +52,20 @@ html, body {
 
 .results {
 	height: 100%;
+	padding-top: 70px;
+}
+
+.maparea {
+	height: 100%;
+}
+
+.resultsarea {
+	height: 100%;
+	overflow-y: scroll;
+}
+
+#map {
+	height: 100%;
 }
 
 .searchHeader {
@@ -88,3 +102,13 @@ html, body {
 .nopadding-left {
 	padding-left: 0px;
 }
+
+/*
+.indeed_link {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	border: 0;
+	vertical-align: bottom;
+}
+*/
