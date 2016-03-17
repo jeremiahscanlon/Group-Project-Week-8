@@ -32,91 +32,66 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="#">
-						<!--<img alt="Logo" src="assets/images/logo.png">-->
+						<img alt="Logo" src="assets/images/logo.png">
 					</a>
-					<h1>Within Reach</h1>
-					
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<ul class="nav navbar-nav navbar-right">
-					<!--
 						<li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Battle Location <span class="caret"></span></a>
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
 				          <ul class="dropdown-menu">
-				            <li><a href="#" id="forest">Ewok Forest</a></li>
-				            <li><a href="#" id="snow">Hoth</a></li>
-				            <li><a href="#" id="ship">Death Star Room</a></li>
-				            <li><a href="#" id="junk">Raxus Prime</a></li>
-				            <li><a href="#" id="street">Level 1313</a></li>
+				            <li><a href="register.html" id="forest">Register</a></li>
+				            <li><a href="login.html" id="snow">Login</a></li>
+				            <li><a href="#" id="ship" style="display: none;">Log Out</a></li>
 				          </ul>
 				        </li>
-						<li><a href="#" id="startOver">Start Over</a></li>
-					-->
 					</ul>
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</div>
 	</nav>
-	<br>
-	<div class="row12 results">
-		<!--_-->
-		<div class="vol-md-12" id="search" style= "display: none;">
-			<form class="form-inline">
-				<div class="form-group">
-					<input type="text" class="form-control" id="keywords" placeholder="Search Keyword(s)">
-				</div>
-				<div class="form-group">
-					<input type="email" class="form-control" id="location" placeholder="City, State or Zip Code">
-				</div>
 
-				<button type="submit" class="btn btn-primary" id="seeResults">See Results</button>
-			</form>
+	<div class="row12" id="search">
+		<div class="col-md-12 text-center center-block search">
+			<p>Type in your location and Search Keyword to find Jobs</p>
+			<h1><span class="title">Within Reach</span></h1>
+			<div class="searchForm">
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="location" placeholder="City, State or Zip Code">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="keywords" placeholder="Search Keyword(s)">
+					</div>
+					<button type="submit" class="btn btn-primary" id="seeResults">See Results</button>
+				</form>
+				
+			</div>
 		</div>
-		<!--__-->
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="row12 results" style= "display: none;">
 		<div class="col-md-8 col-sm-8 nopadding-right nopadding-left maparea" >
 			<div id="map"></div>
 		</div>
-		<div class="col-md-4 col-sm-4 resultsarea" >
-			<div id="resultsList"></div>
-
-		
-			<br>
-		
-		
+		<div class="col-md-4 col-sm-4 resultsarea">
+			<h1 class="text-center"><span class="title">Within Reach</span></h1>
+			<div id="resultsList">
+			</div>
 		</div>
-	
 	</div>
 	
 	<div class="clearfix"></div>
 
-	<!--
 	<div id="indeed_link">
         <a title="Job Search" href="http://www.indeed.com/" target="_new">jobs by <img alt="Indeed" src="http://www.indeed.com/p/jobsearch.gif" style="">
         </a>
     </div>
-	-->
-	
-	<!--
-	<div class="row12 results">
-		<div class="col-md-8 col-sm-8 nopadding-right" style="height:100%;">
-			<div id="map"></div>
-		</div>
-		<div class="col-md-4 col-sm-4">
-			<form class="form-inline">
-				<div class="form-group">
-					<input type="text" class="form-control" id="keywords" placeholder="Search Keyword(s)">
-				</div>
-				<div class="form-group">
-					<input type="email" class="form-control" id="location" placeholder="City, State or Zip Code">
-				</div>
-				<button type="submit" class="btn btn-primary" id="seeResults">See Results</button>
-			</form>
-		</div>
-	</div>
-	-->
 
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw&libraries=places&callback=initMap"
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw&callback=initMap"
     async defer></script>
 	<script type="text/javascript" src="assets/js/app.js"></script>
 	<!--<script type="text/javascript" src="assets/js/gmaps.js"></script>-->
