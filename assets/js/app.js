@@ -76,17 +76,29 @@ function initMap() {
 // Indeed API request
 //==================================================================
 
-$('seeResults').click(function(){
+$('#seeResults').click(function(){
 	var keywords = $('#keywords').val().trim();
 	var home = $('#location').val().trim();
+	
 	$('#keywords').val('');
 	$('#location').val('');
-});
+	$('#search').hide();
+	$('.resultarea').show();
+	$('.maparea').show();
 
-var home = 'New+Brunswick%2C+NJ';
-var keywords = 'node';
-var searchLocation = "&l="+home;
-var searchKeyword = "&q="+keywords;
+	return home; 
+	return keywords;
+
+	var searchLocation = "&l="+home;
+	var searchKeyword = "&q="+keywords;
+
+});
+//var home = 'New Brunswick'
+//var keywords = 'node+full+stack'
+// var home = 'New+Brunswick%2C+NJ';
+// var keywords = 'node';
+// var searchLocation = "&l="+home;
+// var searchKeyword = "&q="+keywords;
 
 
 var queryURL = "http://api.indeed.com/ads/apisearch?publisher=8023780673544955&format=json"+searchKeyword+searchLocation+"&limit=10&v=2";
