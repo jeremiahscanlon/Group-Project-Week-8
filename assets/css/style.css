@@ -16,6 +16,7 @@ html, body {
 
 .navbar-brand img {
 	max-height: 36px;
+
 }
 
 .navbar-container {
@@ -27,6 +28,7 @@ html, body {
 .navbar-brand {
     padding: 7px 15px;
     line-height: 35px;
+     
 }
 
 .navbar-default {
@@ -101,6 +103,14 @@ html, body {
 
 .nopadding-left {
 	padding-left: 0px;
+}
+
+#search {
+
+    margin: auto;
+	width: 40%;
+    border: 3px;
+    padding: 10px;
 }
 
 /*
