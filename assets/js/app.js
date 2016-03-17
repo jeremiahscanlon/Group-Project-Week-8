@@ -76,66 +76,111 @@ function initMap() {
 // Indeed API request
 //==================================================================
 
-$('seeResults').click(function(){
+function initialSearch() {
+	
 	var keywords = $('#keywords').val().trim();
 	var home = $('#location').val().trim();
+	$('#resultsList').show();
 	$('#keywords').val('');
 	$('#location').val('');
-});
-
-var home = 'New+Brunswick%2C+NJ';
-var keywords = 'node';
-var searchLocation = "&l="+home;
-var searchKeyword = "&q="+keywords;
-
-
-var queryURL = "http://api.indeed.com/ads/apisearch?publisher=8023780673544955&format=json"+searchKeyword+searchLocation+"&limit=10&v=2";
-
-console.log(queryURL);
-
-$.ajax({
-	url: queryURL,
-	method: 'GET',
-    crossDomain: true,
-    dataType: 'jsonp'
-})
-.done(function(response) {
 	
-	//console.log(response);
+	var home = 'New+Brunswick%2C+NJ';
+	var keywords = 'node';
+	var searchLocation = "&l="+home;
+	var searchKeyword = "&q="+keywords;
+	var page = "&limit=";
+	var pagenum = 10;
+	var first = true;
 
-	var results = response.results
-	var numResults = response.totalResults;
-	var query = response.query;
-	var responseLocation = response.location;
+	buildResults(searchKeyword,searchLocation,page,pagenum,first);
 
-	$("#resultsList").html("<div class=\"searchHeader\"><h1>"+numResults+" Results for:<br>"+query+"<br>"+responseLocation+"</h1></div>");
+}
 
-	for (var i = 0; i < results.length; i++) {
+function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
+	
+	var searchKey =searchKeyword;
+	var searchLoc = searchLocation;
+	var pag = page;
+	var pageNumber = pagenum;
+	var initialSearch = first;
+
+	var queryURL = "http://api.indeed.com/ads/apisearch?publisher=8023780673544955&format=json"+searchKey+searchLoc+pag+pageNumber+"&v=2";
+	console.log(queryURL);
+
+	console.log(pageNumber);
+
+	$.ajax({
+		url: queryURL,
+		method: 'GET',
+	    crossDomain: true,
+	    dataType: 'jsonp'
+	})
+	.done(function(response) {
 		
-		var jobTitle = results[i].jobtitle;
-		var company = results[i].company;
-		var location = results[i].formattedLocationFull;
-		var snippet = results[i].snippet;
-		var link = results[i].url;
-		var jobKey = results[i].jobkey;
+		//console.log(response);
 
-		$("#resultsList").append("<div class=\"searchResult\" id="+jobKey+"><h2><a href="+link+" target=\"_blank\">" + jobTitle + "</a></h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div>");
+		var results = response.results
+		var numResults = response.totalResults;
+		var query = response.query;
+		var responseLocation = response.location;
 
-		var secondURL = 'http://api.indeed.com/ads/apigetjobs?publisher=8023780673544955&jobkeys='+jobKey+'&format=json&v=2';
+		$("#resultsList").html("<div class=\"searchHeader\"><h1>"+numResults+" Results for:<br>"+query+"<br>"+responseLocation+"</h1></div>");
 
-		$.ajax({
-			url: secondURL,
-			method: 'GET',
-		    crossDomain: true,
-		    dataType: 'jsonp'
-		})
-		.done(function(response) {
-			//console.log(response);
-			var long = response.results[0].longitude;
-			var lat = response.results[0].latitude;
-			var jobKey = response.results[0].jobkey;
+		for (var i = 0; i < results.length; i++) {
+			
+			var jobTitle = results[i].jobtitle;
+			var company = results[i].company;
+			var location = results[i].formattedLocationFull;
+			var snippet = results[i].snippet;
+			var link = results[i].url;
+			var jobKey = results[i].jobkey;
 
-			$("#"+jobKey).append("<p>" + lat +", "+ long + "</p>");
-		});			
-	}
+			$("#resultsList").append("<div class=\"searchResult\" id="+jobKey+"><h2><a href="+link+" target=\"_blank\">" + jobTitle + "</a></h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div>");
+
+			var secondURL = 'http://api.indeed.com/ads/apigetjobs?publisher=8023780673544955&jobkeys='+jobKey+'&format=json&v=2';
+
+			$.ajax({
+				url: secondURL,
+				method: 'GET',
+			    crossDomain: true,
+			    dataType: 'jsonp'
+			})
+			.done(function(response) {
+				//console.log(response);
+				var long = response.results[0].longitude;
+				var lat = response.results[0].latitude;
+				var jobKey = response.results[0].jobkey;
+
+				$("#"+jobKey).append("<p>" + lat +", "+ long + "</p>");
+			});			
+		}
+
+		if (numResults > 10 && numResults > pageNumber){
+			$("#resultsList").append("<button type=\"button\" class=\"btn btn-default center-block\" id=\"nextPage\">Next 10 <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></button>");
+			
+			$('#nextPage').click(function(){
+				if (initialSearch) {
+					var start = '&start=';
+					console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
+					first = false;
+					buildResults(searchKey,searchLoc,start,pageNumber,first);
+				} else {
+					var start = '&start=';
+					pageNumber = pageNumber + 10;
+					console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
+					buildResults(searchKey,searchLoc,start,pageNumber,first);				
+				}
+				
+
+			});
+			
+		}
+
+	});
+}
+
+initialSearch();
+
+$('#seeResults').click(function(){
+	initialSearch();
 });
