@@ -76,6 +76,7 @@ function initMap() {
 // Indeed API request
 //==================================================================
 
+<<<<<<< HEAD
 function initialSearch() {
 	
 	var keywords = $('#keywords').val().trim();
