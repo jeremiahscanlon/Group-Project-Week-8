@@ -27,12 +27,12 @@ html, body {
 }
 
 .navbar-default {
-	background-color: #000;
-    border-color: #000;
+	background-color: #fff;
+    border-bottom: 1px solid #666666;
 }
 
 .navbar-default .navbar-nav>li>a {
-    color: #fff;
+    color: #00aeef;
 }
 
 .navbar-default .navbar-nav>li>a:focus{
@@ -47,6 +47,43 @@ html, body {
 	min-width: 600px;
 }
 
+<<<<<<< HEAD
+=======
+.logoNav {
+	height: 35px;
+}
+
+#mainLogo {
+	width: 450px;
+	margin: 60px 0px 20px 0px;
+}
+
+#tagLine {
+	color: #666666;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.btnSubmit {
+	background-color: #00aeef;
+	border-color: #00aeef;
+	border-radius: 0px 5px 5px 0px;
+}
+
+.btnSubmit:hover {
+	background-color: #666666;
+	border-color: #f5f5f5;
+}
+
+#location {
+	border-radius: 5px 0px 0px 5px;
+}
+
+#keywords {
+	border-radius: 0px;
+}
+
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 #search {
 	height: 100%;
 	padding-top: 50px;
@@ -83,17 +120,35 @@ html, body {
 	height: 100%;
 }
 
+#firstHeading {
+	color: #00aeff;
+}
+
+.blue {
+	color: #00aeff;
+	font-weight: 700;
+}
+
 .searchHeader {
-	font-size:2em;
+	font-size:1.5em;
 	padding-bottom: 10px;
 	border-bottom: 1px solid #d9d9d9;
-	margin-bottom: 10px;
+}
+
+.searchHeader h1 {
+	font-size: 1.2em;
+	line-height: 1.5;
+	color: #66666;
 }
 
 #resultsList h2 {
 	font-size: 1em;
-	line-height: 1;
+	line-height: 1.5;
 	margin: 10px 0px;
+}
+
+#resultsList a {
+	color: #00aeef;
 }
 
 #resultsList h2 a:hover, #resultsList h2 a:focus{
@@ -106,8 +161,12 @@ html, body {
 }
 
 .searchResult {
-	padding-bottom: 5px;
+	padding: 5px;
 	border-bottom: 1px solid #d9d9d9;
+}
+
+.searchResult:hover {
+	background-color: #f5f5f5;
 }
 
 .nopadding-right {

@@ -10,7 +10,11 @@ function initMap() {
 	var mapOptions = {
 		center: myLatLng,
 		zoom: 10,
+<<<<<<< HEAD
 		styles: [{"featureType":"road","elementType":"geometry","stylers":[{"color":"#b1ab85"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#8cc0c3"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#cde6cf"}]},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#efede8"}]}]
+=======
+		styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 	};
 
 	map = new google.maps.Map(document.getElementById('map'), mapOptions);
@@ -77,7 +81,13 @@ function reCenter(lat, long) {
 		position: center,
 		map: map,
 		title: 'This is your Search Center',
+<<<<<<< HEAD
 		icon: 'assets/images/arrow.png'
+=======
+		icon: 'assets/images/markerStart.png',
+ 		zIndex: 1,
+ 		opacity: .6
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 	});
 }
 
@@ -108,7 +118,11 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 		var query = response.query;
 		var responseLocation = response.location;
 
+<<<<<<< HEAD
 		$("#resultsList").html("<div class=\"searchHeader\"><h1>"+numResults+" Results for:<br>"+query+"<br>"+responseLocation+"</h1></div>");
+=======
+		$("#resultsList").html("<div class=\"searchHeader\"><h1><span class='blue'>"+numResults+"</span> Results for:<br>"+query+"<br>"+responseLocation+"</h1></div>");
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 
 		for (var i = 0; i < results.length; i++) {
 
@@ -148,6 +162,10 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 				allMarkers = new google.maps.Marker({
 					position: myLatlng,
 					map: map,
+<<<<<<< HEAD
+=======
+					icon: 'assets/images/markerIcon.png',
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 					title: jobTitle
 				});
 			   	
@@ -167,7 +185,11 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 				});
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
+<<<<<<< HEAD
 					infowindow.open(map,allMarkers);
+=======
+					infowindow.open(map,this);
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 				});
 
 			});			
@@ -198,6 +220,10 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 
 $('#seeResults').click(function(){
 	initialSearch();
+<<<<<<< HEAD
+=======
+	$('.logoNav').show();
+>>>>>>> 559edcc779e941c274793946e177c5f4bea852d5
 
 	// Don't refresh the page!
 	return false;
