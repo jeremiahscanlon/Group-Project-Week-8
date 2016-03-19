@@ -1,4 +1,8 @@
 //==================================================================
+// Universal Variables
+//==================================================================
+
+//==================================================================
 // Google Maps API Key - AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw
 //==================================================================
 
@@ -17,20 +21,30 @@ function initMap() {
 
 }
 
+var map2;
+function initMap2() {
+
+	var myLatLng = {lat: 40.488, lng: -74.439};
+
+	var mapOptions = {
+		center: myLatLng,
+		zoom:11,
+		styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+	};
+
+	map = new google.maps.Map(document.getElementById('map2'), mapOptions);
+
+}
+
 //==================================================================
 // Indeed API request
 //==================================================================
 
 
-function initialSearch() {
+function initialSearch(keywords, home) {
 	
-	var keywords = $('#keywords').val().trim();
-	var home = $('#location').val().trim();
-	$('#keywords').val('');
-	$('#location').val('');
-
-	$('.results').show();
-	$('#search').hide();
+	var keywords = keywords;
+	var home = home;
 	
 	//var home = 'New+Brunswick%2C+NJ';
 	//var keywords = 'node';
@@ -171,6 +185,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
 					infowindow.open(map,this);
+
 				});
 
 			});			
@@ -200,9 +215,64 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 //initialSearch();
 
 $('#seeResults').click(function(){
-	initialSearch();
-	$('.logoNav').show();
+	var keywords = $('#keywords').val().trim();
+	var home = $('#location').val().trim();
+
+	if (home !== ''){
+		initialSearch(keywords, home);
+		$('#keywords').val('');
+		$('#location').val('');
+		$('.navbar').show();
+		$('.results').show();
+		$('#search').hide();
+		$('#map2').hide();
+	} else {
+		alert('Please enter a location.');
+	}
 
 	// Don't refresh the page!
 	return false;
 });
+
+$('#seeResultsNav').click(function(){
+	
+	var keywords = $('#keywords').val().trim();
+	var home = $('#location').val().trim();
+
+	if (home !== ''){
+		initialSearch(keywords, home);
+		$('#keywords').val('');
+		$('#location').val('');
+	} else {
+		alert('Please enter a location.');
+	}
+
+	// Don't refresh the page!
+	return false;
+
+});
+
+//==================================================================
+// Get current Location
+//==================================================================
+
+window.onload = function() {
+	var startPos;
+	var geoOptions = {
+		maximumAge: 5 * 60 * 1000,
+		timeout: 10 * 1000,
+	}
+
+	var geoSuccess = function(position) {
+		startPos = position;
+		console.log('Latitude: '+startPos.coords.latitude + 'Logitude: '+startPos.coords.longitude);
+
+	};
+	var geoError = function(error) {
+		console.log('Error occurred. Error code: ' + error.code);
+	};
+
+	navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+
+	initMap2();
+};

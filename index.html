@@ -20,13 +20,13 @@
 </head>
 <body>
 	<!-- Nav Bar -->
-	<nav class="navbar navbar-default" role="navigation">
+	<nav class="navbar navbar-default" role="navigation" style="display:none;">
 		<div class="navbar-container">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 				<a class="navbar-brand" href="#">
-						<img alt="Within Reach Logo" class="logoNav" src="assets/images/wR_Logo.png" style="display:none">
+						<img alt="Within Reach Logo" class="logoNav" src="assets/images/wR_Logo.png">
 					</a>
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 						<span class="sr-only">Toggle navigation</span>
@@ -38,23 +38,31 @@
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
-				          <ul class="dropdown-menu">
-				            <li><a href="register.html" id="forest">Register</a></li>
-				            <li><a href="login.html" id="snow">Login</a></li>
-				            <li><a href="#" id="ship" style="display: none;">Log Out</a></li>
-				          </ul>
+				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="assets/images/markerStart.png" alt="Current Location"></a>
 				        </li>
 					</ul>
+					<form class="form-inline" id="searchNav">
+						<div class="form-group">
+							<input type="text" class="form-control" id="locationNav" placeholder="City, State or Zip Code">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="keywordsNav" placeholder="Search Keyword(s)">
+						</div>
+						<button type="submit" class="btn btn-primary btnSubmit" id="seeResultsNav">New Search</button>
+					</form>
 				</div><!-- /.navbar-collapse -->
 			</div>
 		</div>
 	</nav>
+	
+	<div class="row12" id="map2"></div>div>
 
 	<div class="row12" id="search">
-		<div class="col-md-12 text-center center-block search">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 text-center center-block search">
 			
 			<div><img id="mainLogo" src="assets/images/wR_Logo.png" alt="Within Reach Logo"></div>
 			<p id="tagLine">Type in your location and Search Keyword to find Jobs</p>
@@ -68,9 +76,9 @@
 					</div>
 					<button type="submit" class="btn btn-primary btnSubmit" id="seeResults">See Results</button>
 				</form>
-				
 			</div>
 		</div>
+		<div class="col-md-3"></div>
 	</div>
 
 	<div class="clearfix"></div>

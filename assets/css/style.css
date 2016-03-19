@@ -6,6 +6,15 @@ html, body {
 	font-family: 'Open Sans', sans-serif;
 }
 
+body {
+}
+
+#map2 {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
 .navbar {
 	margin-bottom: 0px;
 	border-radius: 0px;
@@ -15,7 +24,6 @@ html, body {
 }
 
 .navbar-container {
-	max-width: 1200px;
 	margin: 0px auto;
 	font-family: 'Open Sans', sans-serif;
 }
@@ -53,7 +61,7 @@ html, body {
 
 #mainLogo {
 	width: 450px;
-	margin: 60px 0px 20px 0px;
+	margin: 20px 0px 20px 0px;
 }
 
 #tagLine {
@@ -82,7 +90,6 @@ html, body {
 }
 
 #search {
-	height: 100%;
 	padding-top: 50px;
 	margin: 0px auto;
 }
@@ -126,6 +133,11 @@ html, body {
 	font-weight: 700;
 }
 
+.search {
+	background-color: rgb(255,255,255);
+	background-color: rgba(255,255,255,0.8);
+	border-radius: 4px;
+}
 .searchHeader {
 	font-size:1.5em;
 	padding-bottom: 10px;
@@ -185,4 +197,9 @@ html, body {
 
 #nextPage {
 	margin: 20px auto;
+}
+
+#searchNav {
+	margin-top: 7px;
+	float: right;	
 }
