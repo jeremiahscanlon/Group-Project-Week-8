@@ -186,3 +186,7 @@ html, body {
 #nextPage {
 	margin: 20px auto;
 }
+
+.clicked {
+	background-color: #d9f1fc;
+}
