@@ -45,7 +45,7 @@ body {
 
 #mainLogo {
 	width: 450px;
-	margin: 20px 0px 20px 0px;
+	margin: 15px 0px 20px 0px;
 }
 
 .currentLoc {
@@ -84,6 +84,11 @@ body {
 #search {
 	padding-top: 125px;
 	margin: 0px auto;
+}
+
+#currentLocNav {
+	color: #666666;
+	text-decoration: none;
 }
 
 #search p {
@@ -127,8 +132,14 @@ body {
 
 .search {
 	background-color: rgb(255,255,255);
-	background-color: rgba(255,255,255,0.8);
-	border-radius: 4px;
+	background-color: rgba(255,255,255,0.9);
+	border-radius: 5px;
+	padding: 15px;
+	border: 1px solid rgba(102, 102, 102, 0.9);
+	-moz-box-shadow: 0 0 5px 5px rgba(102, 102, 102, 0.4);
+	-webkit-box-shadow: 0 0 5px 5px rgba(102, 102, 102, 0.4);
+	box-shadow: 0 0 5px 5px rgba(102, 102, 102, 0.4);
+
 }
 .searchHeader {
 	font-size: 1em;
@@ -212,3 +223,16 @@ body {
 	background-color: #d9f1fc;
 }
 
+#locationNav {
+	border-radius: 5px 0px 0px 5px;
+}
+
+#keywordsNav {
+	border-radius: 0px;
+}
+
+#nextPage {
+	margin-bottom: 150%;
+}
+
+.gm-style-iw + div {display: none;}

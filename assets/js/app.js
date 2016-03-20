@@ -4,11 +4,13 @@
 
 var infowindow = null;
 
+
 //==================================================================
 // Google Maps API Key - AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw
 //==================================================================
 
 var map;
+
 function initMap() {
 
 	var myLatLng = {lat: 40.488, lng: -74.439};
@@ -157,6 +159,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 				var jobTitle = response.results[0].jobtitle;
 				var link = response.results[0].url;
 				var cCompany = response.results[0].company;
+				var snippet = response.results[0].snippet;
 
 				//$("#"+jobKey).append("<p>" + lat +", "+ long + "</p>");
 				$("#"+jobKey).attr('data-lat', lat);
@@ -179,13 +182,14 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 										'<h3 id="firstHeading" class="firstHeading">'+jobTitle+'</h3>'+
 										'<div id="bodyContent">'+
 											'<p><b>'+company+'</b></p>'+
-											'<a href="'+link+'" target="_blank">'+
-											'Job Details</a> '+
+											'<p>'+snippet+'</p> '+
 										'</div>'+
 									'</div>';
 
 				var infowindow = new google.maps.InfoWindow({
-					content: contentString
+					content: contentString,
+					maxWidth: 300, 
+					buttons: { close: { visible: false } }
 				});
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
@@ -193,7 +197,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 						$('#' + jobKey).addClass('clicked').siblings().removeClass('clicked');
 						$('.resultsarea').scrollTop(0);
 						$('.resultsarea').animate({
-							scrollTop: $('#' + jobKey).position().top -25}, 100);
+							scrollTop: $('#' + jobKey).position().top - 25 }, 500);
 				});
 
 				google.maps.event.addListener(allMarkers, 'mouseover', function() {
@@ -208,7 +212,6 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 
 		if (numResults > 10 && numResults >= pageNumber){
 			$("#resultsList").append("<button type=\"button\" class=\"btn btn-default center-block\" id=\"nextPage\">Next 10 <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></button>");
-			
 			$('#nextPage').click(function(){
 				if (initialSearch) {
 					var start = '&start=';
