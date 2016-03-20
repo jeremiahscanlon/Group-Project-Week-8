@@ -128,6 +128,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 		var responseLocation = response.location;
 
 		$("#resultsListHeader").html("<div class=\"searchHeader\"><span class='badge'>"+numResults+"</span> Results for: <span class='badge'>"+query+"</span> - <span class='badge'>"+responseLocation+"</span></div>");
+		$('#resultsList').html('');
 
 		for (var i = 0; i < results.length; i++) {
 
