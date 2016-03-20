@@ -189,7 +189,17 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
 					infowindow.open(map,this);
+						$('#' + jobKey).addClass('clicked').siblings().removeClass('clicked');
+						$('.resultsarea').scrollTop(0);
+						$('.resultsarea').animate({
+							scrollTop: $('#' + jobKey).position().top}, 100);
+				});
 
+				google.maps.event.addListener(allMarkers, 'mouseover', function() {
+					infowindow.open(map,this);
+				});
+				google.maps.event.addListener(allMarkers, 'mouseout', function() {
+					infowindow.close(map,this);
 				});
 
 			});			

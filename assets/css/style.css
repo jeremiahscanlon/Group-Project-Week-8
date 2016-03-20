@@ -202,12 +202,17 @@ body {
 	vertical-align: bottom;
 }
 
-
 #nextPage {
 	margin: 20px auto;
 }
+
 
 #searchNav {
 	margin-top: 7px;
 	float: right;	
 }
+
+.clicked {
+	background-color: #d9f1fc;
+}
+
