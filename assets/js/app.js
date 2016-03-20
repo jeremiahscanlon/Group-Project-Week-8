@@ -1,4 +1,10 @@
 //==================================================================
+// Universal Variables
+//==================================================================
+
+var infowindow = null;
+
+//==================================================================
 // Google Maps API Key - AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw
 //==================================================================
 
@@ -17,20 +23,30 @@ function initMap() {
 
 }
 
+var map2;
+function initMap2() {
+
+	var myLatLng = {lat: 40.9452, lng: -74.1829};
+
+	var mapOptions = {
+		center: myLatLng,
+		zoom:11,
+		styles: [{"featureType":"water","elementType":"geometry","stylers":[{"color":"#e9e9e9"},{"lightness":17}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#f5f5f5"},{"lightness":21}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]}]
+	};
+
+	map2 = new google.maps.Map(document.getElementById('map2'), mapOptions);
+
+}
+
 //==================================================================
 // Indeed API request
 //==================================================================
 
 
-function initialSearch() {
+function initialSearch(keywords, home) {
 	
-	var keywords = $('#keywords').val().trim();
-	var home = $('#location').val().trim();
-	$('#keywords').val('');
-	$('#location').val('');
-
-	$('.results').show();
-	$('#search').hide();
+	var keywords = keywords;
+	var home = home;
 	
 	//var home = 'New+Brunswick%2C+NJ';
 	//var keywords = 'node';
@@ -49,21 +65,17 @@ function getCenter(home) {
 	var centerLocation = home;
 
 	var requestURL = 'https://maps.googleapis.com/maps/api/geocode/json?address='+centerLocation+'&key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw';
-	
-	console.log(requestURL);
 
 	$.ajax({
 		url: requestURL,
 		method: 'GET',
 	})
 	.done(function(response) {
-		console.log(response);
+		//console.log(response);
 		var results = response.results[0].geometry.location;
 		var centerLat = results.lat;
 		var centerLong = results.lng;
 
-		console.log('lat: '+centerLat);
-		console.log('long: '+centerLong);
 		initMap();
 		reCenter(centerLat, centerLong);
 	});
@@ -81,6 +93,11 @@ function reCenter(lat, long) {
  		zIndex: 1,
  		opacity: .6
 	});
+}
+
+function reCenter2(lat, long) {
+	var center = new google.maps.LatLng(lat, long);
+	map2.panTo(center);
 }
 
 
@@ -103,14 +120,14 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 	})
 	.done(function(response) {
 		
-		console.log(response);
+		//console.log(response);
 
 		var results = response.results
 		var numResults = response.totalResults;
 		var query = response.query;
 		var responseLocation = response.location;
 
-		$("#resultsList").html("<div class=\"searchHeader\"><h1><span class='blue'>"+numResults+"</span> Results for:<br>"+query+"<br>"+responseLocation+"</h1></div>");
+		$("#resultsList").html("<div class=\"searchHeader\"><span class='badge'>"+numResults+"</span> Results for: <span class='badge'>"+query+"</span> - <span class='badge'>"+responseLocation+"</span></div>");
 
 		for (var i = 0; i < results.length; i++) {
 
@@ -151,6 +168,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 					position: myLatlng,
 					map: map,
 					icon: 'assets/images/markerIcon.png',
+					animation: google.maps.Animation.DROP,
 					title: jobTitle
 				});
 			   	
@@ -171,7 +189,6 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
 					infowindow.open(map,this);
-
 						$('#' + jobKey).addClass('clicked').siblings().removeClass('clicked');
 						$('.resultsarea').scrollTop(0);
 						$('.resultsarea').animate({
@@ -194,13 +211,14 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 			$('#nextPage').click(function(){
 				if (initialSearch) {
 					var start = '&start=';
-					console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
+					//console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
 					first = false;
+					getCenter(searchLoc);
 					buildResults(searchKey,searchLoc,start,pageNumber,first);
 				} else {
 					var start = '&start=';
 					pageNumber = pageNumber + 10;
-					console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
+					//console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
 					buildResults(searchKey,searchLoc,start,pageNumber,first);				
 				}
 			});	
@@ -212,9 +230,114 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 //initialSearch();
 
 $('#seeResults').click(function(){
-	initialSearch();
-	$('.logoNav').show();
+	var keywords = $('#keywords').val().trim();
+	var home = $('#location').val().trim();
+
+	if (home !== ''){
+		initialSearch(keywords, home);
+		$('#keywords').val('');
+		$('#location').val('');
+		$('.navbar').show();
+		$('.results').show();
+		$('#search').hide();
+		$('#map2').hide();
+	} else {
+		alert('Please enter a location.');
+	}
 
 	// Don't refresh the page!
 	return false;
+});
+
+$('#seeResultsNav').click(function(){
+	
+	var keywords = $('#keywordsNav').val().trim();
+	var home = $('#locationNav').val().trim();
+
+	if (home !== ''){
+		initialSearch(keywords, home);
+		$('#keywords').val('');
+		$('#location').val('');
+	} else {
+		alert('Please enter a location.');
+	}
+
+	// Don't refresh the page!
+	return false;
+
+});
+
+//==================================================================
+// Get current Location
+//==================================================================
+
+window.onload = function() {
+	var startPos;
+	var geoOptions = {
+		maximumAge: 5 * 60 * 1000,
+		timeout: 10 * 1000,
+	}
+
+	var geoSuccess = function(position) {
+		startPos = position;
+		var lati = startPos.coords.latitude;
+		var longi = startPos.coords.longitude;
+		var latlong = lati+","+longi;
+
+		var geoRequestURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latlong+'&key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw';
+
+		$.ajax({
+			url: geoRequestURL,
+			method: 'GET',
+		})
+		.done(function(response) {
+			//console.log(response);
+			var currentZip = response.results[0].address_components[6].short_name;
+			$('#location').val(currentZip);
+		});
+		reCenter2(lati,longi);
+
+	};
+	var geoError = function(error) {
+		console.log('Error occurred. Error code: ' + error.code);
+	};
+
+	navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+
+	initMap2();
+};
+
+$('#currentLocNav').click(function(){
+	
+	var startPos;
+	var geoOptions = {
+		maximumAge: 5 * 60 * 1000,
+		timeout: 10 * 1000,
+	}
+
+	var geoSuccess = function(position) {
+		startPos = position;
+		//console.log('Latitude: '+startPos.coords.latitude + 'Logitude: '+startPos.coords.longitude);
+		var latlong = startPos.coords.latitude+","+startPos.coords.longitude;
+		var geoRequestURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latlong+'&key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw';
+
+		$.ajax({
+			url: geoRequestURL,
+			method: 'GET',
+		})
+		.done(function(response) {
+			//console.log(response);
+			var currentZip = response.results[0].address_components[6].short_name;
+			$('#locationNav').val(currentZip);
+		});
+	};
+	var geoError = function(error) {
+		console.log('Error occurred. Error code: ' + error.code);
+	};
+
+	navigator.geolocation.getCurrentPosition(geoSuccess, geoError, geoOptions);
+
+	// Don't refresh the page!
+	return false;
+
 });
