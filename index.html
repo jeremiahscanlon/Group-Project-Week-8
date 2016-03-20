@@ -38,13 +38,8 @@
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
-					
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="assets/images/markerStart.png" alt="Current Location"></a>
-				        </li>
-					</ul>
 					<form class="form-inline" id="searchNav">
+						<a href="#" id="currentLocNav">Get Current Location:&nbsp;<img src="assets/images/markerStart.png" alt="Current Location" id="currentLocation"></a>
 						<div class="form-group">
 							<input type="text" class="form-control" id="locationNav" placeholder="City, State or Zip Code">
 						</div>
@@ -58,7 +53,9 @@
 		</div>
 	</nav>
 	
-	<div class="row12" id="map2"></div>div>
+	<div class="row12" id="map2"></div>
+
+	<div class="clearfix"></div>
 
 	<div class="row12" id="search">
 		<div class="col-md-3"></div>
