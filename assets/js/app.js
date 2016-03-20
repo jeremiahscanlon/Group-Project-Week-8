@@ -127,7 +127,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 		var query = response.query;
 		var responseLocation = response.location;
 
-		$("#resultsList").html("<div class=\"searchHeader\"><span class='badge'>"+numResults+"</span> Results for: <span class='badge'>"+query+"</span> - <span class='badge'>"+responseLocation+"</span></div>");
+		$("#resultsListHeader").html("<div class=\"searchHeader\"><span class='badge'>"+numResults+"</span> Results for: <span class='badge'>"+query+"</span> - <span class='badge'>"+responseLocation+"</span></div>");
 
 		for (var i = 0; i < results.length; i++) {
 
@@ -157,7 +157,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 				var link = response.results[0].url;
 				var cCompany = response.results[0].company;
 
-				$("#"+jobKey).append("<p>" + lat +", "+ long + "</p>");
+				//$("#"+jobKey).append("<p>" + lat +", "+ long + "</p>");
 				$("#"+jobKey).attr('data-lat', lat);
 				$("#"+jobKey).attr('data-long', long);
 				$("#"+jobKey).attr('data-company', jobTitle);
@@ -192,7 +192,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 						$('#' + jobKey).addClass('clicked').siblings().removeClass('clicked');
 						$('.resultsarea').scrollTop(0);
 						$('.resultsarea').animate({
-							scrollTop: $('#' + jobKey).position().top}, 100);
+							scrollTop: $('#' + jobKey).position().top -25}, 100);
 				});
 
 				google.maps.event.addListener(allMarkers, 'mouseover', function() {

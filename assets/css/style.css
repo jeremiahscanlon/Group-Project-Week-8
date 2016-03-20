@@ -39,22 +39,6 @@ body {
     border-bottom: none;
 }
 
-.navbar-default .navbar-nav>li>a {
-    color: #00aeef;
-    padding:0px;
-}
-
-.navbar-default .navbar-nav>li>a:focus{
-    color: #777;
-}
-
-.navbar-default .navbar-nav>li>a:hover {
-	color: #777;	
-}
-.navbar-header {
-	min-width: 600px;
-}
-
 .logoNav {
 	height: 35px;
 }
@@ -151,11 +135,23 @@ body {
 	line-height: 1.5;
 	color: #666666;
 	padding-bottom: 10px;
+	background-color: #fff;
 	border-bottom: 1px solid #d9d9d9;
 }
 
 .badge {
 	background-color: #00aeef;
+}
+
+#resultsListHeader {
+	position: fixed;
+	background:#fff;
+	height: 25px;
+	width: 30%;
+}
+
+#resultsList {
+	padding-top: 25px;
 }
 
 #resultsList h2 {
