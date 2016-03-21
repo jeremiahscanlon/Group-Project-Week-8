@@ -77,25 +77,10 @@ savedSearch.on("child_added", function(childSnapshot, prevChildKey){
 });
 //////////////////////////////////////END OF FIREBASE////////////////////////////////////////////////
 
-<<<<<<< HEAD
-function initialSearch() {
-	 
-	
-	
-	var keywords = $('#keywords').val().trim();
-	var home = $('#location').val().trim();
-
-	$('#keywords').val('');
-	$('#location').val('');
-
-	$('.results').show();
-	$('#search').hide();
-=======
 function initialSearch(keywords, home) {
 	
 	var keywords = keywords;
 	var home = home;
->>>>>>> 65d97369d6f2c9fbde50f9bbaf8cc0c899fad162
 	
 	//var home = 'New+Brunswick%2C+NJ';
 	//var keywords = 'node';
@@ -180,12 +165,8 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 		var query = response.query;
 		var responseLocation = response.location;
 
-<<<<<<< HEAD
-		$("#resultsList").html("<div class=\"searchHeader\"><h1><span class='blue'>"+numResults+"</span> Results for:<br>"+query+"<br>"+responseLocation+"</h1></div>");
-=======
 		$("#resultsListHeader").html("<div class=\"searchHeader\"><span class='badge'>"+numResults+"</span> Results for: <span class='badge'>"+query+"</span> - <span class='badge'>"+responseLocation+"</span></div>");
 		$('#resultsList').html('');
->>>>>>> 65d97369d6f2c9fbde50f9bbaf8cc0c899fad162
 
 		for (var i = 0; i < results.length; i++) {
 
@@ -226,10 +207,7 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 					position: myLatlng,
 					map: map,
 					icon: 'assets/images/markerIcon.png',
-<<<<<<< HEAD
-=======
 					animation: google.maps.Animation.DROP,
->>>>>>> 65d97369d6f2c9fbde50f9bbaf8cc0c899fad162
 					title: jobTitle
 				});
 			   	
@@ -250,8 +228,6 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
 					infowindow.open(map,this);
-<<<<<<< HEAD
-=======
 						$('#' + jobKey).addClass('clicked').siblings().removeClass('clicked');
 						$('.resultsarea').scrollTop(0);
 						$('.resultsarea').animate({
@@ -263,7 +239,6 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 				});
 				google.maps.event.addListener(allMarkers, 'mouseout', function() {
 					infowindow.close(map,this);
->>>>>>> 65d97369d6f2c9fbde50f9bbaf8cc0c899fad162
 				});
 
 			});			
@@ -294,15 +269,6 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 //initialSearch();
 
 $('#seeResults').click(function(){
-<<<<<<< HEAD
-	initialSearch();
-	$('.logoNav').show();
-
-	// Don't refresh the page!
-	return false;
-});
-
-=======
 	var keywords = $('#keywords').val().trim();
 	var home = $('#location').val().trim();
 
@@ -414,4 +380,3 @@ $('#currentLocNav').click(function(){
 	return false;
 
 });
->>>>>>> 65d97369d6f2c9fbde50f9bbaf8cc0c899fad162
