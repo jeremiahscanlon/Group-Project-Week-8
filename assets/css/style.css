@@ -211,8 +211,17 @@ body {
 
 #nextPage {
 	margin: 20px auto;
+	float: right;
 }
 
+#previousPage {
+	margin: 20px auto;
+	float: left;
+}
+
+#nextPage {
+	margin-bottom: 150%;
+}
 
 #searchNav {
 	margin-top: 7px;
@@ -231,8 +240,6 @@ body {
 	border-radius: 0px;
 }
 
-#nextPage {
-	margin-bottom: 150%;
-}
+
 
 .gm-style-iw + div {display: none;}

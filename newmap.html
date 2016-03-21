@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Job Find</title>
+	
+	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic|Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+
+</head>
+<body>
+	<!-- Nav Bar -->
+	<nav class="navbar navbar-default" role="navigation" style="display:none;">
+		<div class="navbar-container">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+				<a class="navbar-brand" href="#">
+						<img alt="Within Reach Logo" class="logoNav" src="assets/images/wR_Logo.png">
+					</a>
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse navbar-ex1-collapse">
+					<form class="form-inline" id="searchNav">
+						<a href="#" id="currentLocNav">Get Current Location:&nbsp;<img src="assets/images/markerStart.png" alt="Current Location" id="currentLocation"></a>
+						<div class="form-group">
+							<input type="text" class="form-control" id="locationNav" placeholder="City, State or Zip Code">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="keywordsNav" placeholder="Search Keyword(s)">
+						</div>
+						<button type="submit" class="btn btn-primary btnSubmit" id="seeResultsNav">New Search</button>
+					</form>
+				</div><!-- /.navbar-collapse -->
+			</div>
+		</div>
+	</nav>
+	
+	<div class="row12" id="map2"></div>
+
+	<div class="clearfix"></div>
+
+	<div class="row12" id="search">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 text-center center-block search">
+			<div><img id="mainLogo" src="assets/images/wR_Logo.png" alt="Within Reach Logo"></div>
+			<p id="tagLine">Type in your location and Search Keyword to find Jobs</p>
+			<div class="searchForm">
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="location" placeholder="City, State or Zip Code">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="keywords" placeholder="Search Keyword(s)">
+					</div>
+					<button type="submit" class="btn btn-primary btnSubmit" id="seeResults">See Results</button>
+				</form>
+			</div>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="row12 results" style="display:none">
+		<div class="col-md-8 col-sm-8 nopadding-right nopadding-left maparea" >
+			<div id="gmap"></div>
+		</div>
+		<div class="col-md-4 col-sm-4 resultsarea">
+		<!--	<h1 class="text-center"><span class="title">Within Reach</span></h1> -->
+			<div id="resultsListHeader"></div>
+			<div id="controls"></div>
+		</div>
+	</div>
+	
+	<div class="clearfix"></div>
+
+	<div id="indeed_link">
+        <a title="Job Search" href="http://www.indeed.com/" target="_new">jobs by <img alt="Indeed" src="http://www.indeed.com/p/jobsearch.gif" style="">
+        </a>
+    </div>
+
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=geometry&v=3.22&key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw"
+    async defer></script>
+	<!--<script type="text/javascript" src="assets/js/app.js"></script>-->
+	<!--<script type="text/javascript" src="assets/js/gmaps.js"></script>-->
+	<script type="text/javascript" src="assets/js/testing.js"></script>
+	<script type="text/javascript" src="assets/js/maplace.min.js"></script>
+	
+</body>
+</html>
