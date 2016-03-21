@@ -44,6 +44,40 @@ function initMap2() {
 // Indeed API request
 //==================================================================
 
+//////////////////////////////////////START OF FIREBASE/////////////////////////////////////////
+var savedSearch = new Firebase("https://withinreachjobs.firebaseio.com/");
+		//Firebase 
+function searchCall(keywords, home){
+	
+	var search = {
+		keyWord:  keywords,
+		home: home,
+		
+	}
+	savedSearch.push(search);
+}
+
+//Firebase input
+// 3. Create Firebase event for adding search history to the database and a row in the html when a user adds an entry
+savedSearch.on("child_added", function(childSnapshot, prevChildKey){
+
+	console.log(childSnapshot.val());
+
+	// Store everything into a variable.
+	var keywords = childSnapshot.val().keywords;
+	var location = childSnapshot.val().home;
+	
+
+	// Search info
+	console.log(keywords);
+	console.log(location);
+	
+
+	// Add each train's data into the table 
+	$("#searchTable > tbody").append("<tr><td>" + keywords + "</td><td>" + location + "</td><td>");
+
+});
+//////////////////////////////////////END OF FIREBASE////////////////////////////////////////////////
 
 function initialSearch(keywords, home) {
 	
@@ -58,6 +92,10 @@ function initialSearch(keywords, home) {
 	var resultsnum = 10;
 	var pageNumber = 1;
 	var first = true;
+
+
+    searchCall(keywords, home);
+	
 
 	getCenter(home);
 	buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first);
