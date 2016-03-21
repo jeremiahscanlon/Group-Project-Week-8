@@ -54,12 +54,13 @@ function initialSearch(keywords, home) {
 	//var keywords = 'node';
 	var searchLocation = "&l="+home;
 	var searchKeyword = "&q="+keywords;
-	var page = "&limit=";
-	var pagenum = 10;
+	var limit = "&limit=";
+	var resultsnum = 10;
+	var pageNumber = 1;
 	var first = true;
 
 	getCenter(home);
-	buildResults(searchKeyword,searchLocation,page,pagenum,first);
+	buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first);
 
 }
 
@@ -103,16 +104,19 @@ function reCenter2(lat, long) {
 }
 
 
-function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
+function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first) {
 	
 	var searchKey =searchKeyword;
 	var searchLoc = searchLocation;
-	var pag = page;
-	var pageNumber = pagenum;
+	var lim = limit;
+	var resultsNumber = resultsnum;
+	var pagenum = pageNumber;
 	var initialSearch = first;
 
-	var queryURL = "http://api.indeed.com/ads/apisearch?publisher=8023780673544955&format=json"+searchKey+searchLoc+pag+pageNumber+"&v=2";
-	//console.log(queryURL);
+	console.log("Before buttons added >>> Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
+
+	var queryURL = "http://api.indeed.com/ads/apisearch?publisher=8023780673544955&format=json"+searchKey+searchLoc+lim+resultsNumber+"&v=2";
+	console.log('queryURL: '+queryURL);
 
 	$.ajax({
 		url: queryURL,
@@ -210,20 +214,43 @@ function buildResults(searchKeyword,searchLocation,page,pagenum,first) {
 			});			
 		}
 
-		if (numResults > 10 && numResults >= pageNumber){
+		if ( Math.ceil(numResults / 10) > pagenum ){
 			$("#resultsList").append("<button type=\"button\" class=\"btn btn-default center-block\" id=\"nextPage\">Next 10 <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></button>");
 			$('#nextPage').click(function(){
 				if (initialSearch) {
 					var start = '&start=';
-					//console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
-					first = false;
-					getCenter(searchLoc);
-					buildResults(searchKey,searchLoc,start,pageNumber,first);
+					initialSearch = false;
+					pagenum++;
+					console.log("Next Page first: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
+					//getCenter(searchLoc);
+					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,initialSearch);
 				} else {
 					var start = '&start=';
-					pageNumber = pageNumber + 10;
-					//console.log(searchKey +" - "+ searchLoc +" - "+ start +" - " + pageNumber+" - " + initialSearch);
-					buildResults(searchKey,searchLoc,start,pageNumber,first);				
+					pagenum++;
+					resultsNumber = resultsNumber + 10;
+					console.log("Next Page after first: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
+					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,initialSearch);				
+				}
+			});	
+		}
+
+		if ( pagenum > 1 ){
+			$("#resultsList").append("<button type=\"button\" class=\"btn btn-default center-block\" id=\"previousPage\"><span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span> Previous 10</button>");
+			$('#previousPage').click(function(){
+				if (pagenum == 2) {
+					var limit = "&limit=";
+					first = true;
+					resultsNumber = 10;
+					pagenum--;
+					console.log("Previous page from page 2: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
+					//getCenter(searchLoc);
+					buildResults(searchKey,searchLoc,limit,resultsNumber,pagenum,first);
+				} else {
+					var start = '&start=';
+					pagenum--;
+					resultsNumber = resultsNumber - 10;
+					console.log("Previous page from after 2: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
+					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,first);				
 				}
 			});	
 		}
@@ -295,7 +322,8 @@ window.onload = function() {
 			method: 'GET',
 		})
 		.done(function(response) {
-			//console.log(response);
+			console.log('browser location response:');
+			console.log(response);
 			var currentZip = response.results[0].address_components[6].short_name;
 			$('#location').val(currentZip);
 		});
@@ -330,7 +358,8 @@ $('#currentLocNav').click(function(){
 			method: 'GET',
 		})
 		.done(function(response) {
-			//console.log(response);
+			console.log('browser location response Nav Bar:');
+			console.log(response);
 			var currentZip = response.results[0].address_components[6].short_name;
 			$('#locationNav').val(currentZip);
 		});
