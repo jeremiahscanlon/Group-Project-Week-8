@@ -73,6 +73,22 @@
 					<button type="submit" class="btn btn-primary btnSubmit" id="seeResults">See Results</button>
 				</form>
 			</div>
+			<div class="panel panel-default">
+				<div class="panel-heading">		
+					Recent Searches
+				</div>
+				<div class="panel-body">
+					<table class="table table-striped table-hover">
+					<thead>
+						<tr>
+							<th>Location</th>
+							<th>Keywords</th>
+						</tr>
+					</thead>
+					<tbody id="searchTable"></tbody>
+				</table>
+				</div>
+			</div>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
@@ -93,8 +109,7 @@
 	<div class="clearfix"></div>
 
 	<div id="indeed_link">
-        <a title="Job Search" href="http://www.indeed.com/" target="_new">jobs by <img alt="Indeed" src="http://www.indeed.com/p/jobsearch.gif" style="">
-        </a>
+        <a title="Job Search" href="http://www.indeed.com/" target="_new">jobs by <img alt="Indeed" src="http://www.indeed.com/p/jobsearch.gif" style=""></a>
     </div>
 
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw&callback=initMap"

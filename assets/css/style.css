@@ -241,7 +241,11 @@ body {
 	border-radius: 0px;
 }
 
+.gm-style-iw + div {
+	display: none;
+}
 
-
-.gm-style-iw + div {display: none;}
-
+#searchTable {
+    height: 120px;
+    overflow-y: auto;
+}
