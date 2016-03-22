@@ -64,7 +64,7 @@ savedSearch.on("child_added", function(childSnapshot, prevChildKey){
 	console.log(childSnapshot.val());
 
 	// Store everything into a variable.
-	var keywords = childSnapshot.val().keywords;
+	var jobStore = childSnapshot.val().keyWord;
 	var location = childSnapshot.val().home;
 	
 
@@ -74,9 +74,23 @@ savedSearch.on("child_added", function(childSnapshot, prevChildKey){
 	
 
 	// Add each train's data into the table 
-	$("#searchTable").append("<tr><td>" + location + "</td><td>" + keywords + "</td><td>");
+	$("#searchTable").append("<tr><td>" + location + "</td><td>" + jobStore + "</td><td>");
 
 });
+
+	//Hides the saved search
+	$( "#searchList" ).hide( "slow" );
+
+	//Recent search hide/show
+	  $(document).ready(function(){
+   			$("#recentSearches").click(function(){
+        		$("#searchList").toggle();
+
+    });
+});
+
+
+
 //////////////////////////////////////END OF FIREBASE////////////////////////////////////////////////
 
 function initialSearch(keywords, home) {

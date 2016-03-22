@@ -249,3 +249,9 @@ body {
     height: 120px;
     overflow-y: auto;
 }
+
+th {
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+}
