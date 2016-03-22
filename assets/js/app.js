@@ -74,7 +74,7 @@ savedSearch.on("child_added", function(childSnapshot, prevChildKey){
 	
 
 	// Add each train's data into the table 
-	$("#searchTable > tbody").append("<tr><td>" + keywords + "</td><td>" + location + "</td><td>");
+	$("#searchTable").append("<tr><td>" + location + "</td><td>" + keywords + "</td><td>");
 
 });
 //////////////////////////////////////END OF FIREBASE////////////////////////////////////////////////
