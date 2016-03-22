@@ -44,8 +44,22 @@ body {
 }
 
 #mainLogo {
-	width: 450px;
+	max-width: 450px;
 	margin: 15px 0px 20px 0px;
+}
+
+.recentSearch {
+	width:80%;
+	margin: 10px auto 30px auto;
+}
+
+#recentSearch:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+.recentSearchRow {
+    text-align: center;
 }
 
 .currentLoc {
@@ -175,7 +189,11 @@ body {
 	color: #00aeef;
 }
 
-#resultsList h2 a:hover, #resultsList h2 a:focus{
+#resultsList a p {
+	color: #666666;
+}
+
+#resultsList a:hover, #resultsList a:focus{
 	text-decoration: none;
 }
 
