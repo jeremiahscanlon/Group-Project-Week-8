@@ -3,10 +3,11 @@
 //==================================================================
 
 var infowindow = null;
+var allMarkers = [];
 
 
 //==================================================================
-// Google Maps API Key - AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw
+// Google Maps (API Key - AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw)
 //==================================================================
 
 var map;
@@ -40,45 +41,47 @@ function initMap2() {
 
 }
 
+
 //==================================================================
-// Indeed API request
+// Firebase
 //==================================================================
 
-//////////////////////////////////////START OF FIREBASE/////////////////////////////////////////
-var savedSearch = new Firebase("https://withinreachjobs.firebaseio.com/");
-		//Firebase 
+// create firebase variable
+var savedSearch = new Firebase("https://withinreach.firebaseio.com/");
+
+// function to add new search to the database
 function searchCall(keywords, home){
 	
 	var search = {
 		keyWord:  keywords,
 		home: home,
-		
 	}
 	savedSearch.push(search);
 }
 
-//Firebase input
-// 3. Create Firebase event for adding search history to the database and a row in the html when a user adds an entry
-savedSearch.on("child_added", function(childSnapshot, prevChildKey){
+// Create Firebase event for adding search history from database into row in the html when a user adds an entry
+savedSearch.limitToLast(5).on("child_added", function(childSnapshot, prevChildKey){
 
-	console.log(childSnapshot.val());
+	// console.log(childSnapshot.val());
 
 	// Store everything into a variable.
-	var keywords = childSnapshot.val().keywords;
+	var keywords = childSnapshot.val().keyWord;
 	var location = childSnapshot.val().home;
-	
 
 	// Search info
-	console.log(keywords);
-	console.log(location);
-	
+	// console.log(keywords);
+	// console.log(location);
 
-	// Add each train's data into the table 
-	$("#searchTable").append("<tr><td>" + location + "</td><td>" + keywords + "</td><td>");
-
+	// Add each train's data into the table
+	$("#searchTable").append("<tr class=\"recentSearchRow\" data-keyword=\""+keywords+"\" data-location=\""+location+"\"><td>" + location + "</td><td>" + keywords + "</td></tr>");
+	createClick();
 });
-//////////////////////////////////////END OF FIREBASE////////////////////////////////////////////////
 
+//==================================================================
+// Functions
+//==================================================================
+
+// take keywords and home from the search field and send it to other functions
 function initialSearch(keywords, home) {
 	
 	var keywords = keywords;
@@ -93,15 +96,11 @@ function initialSearch(keywords, home) {
 	var pageNumber = 1;
 	var first = true;
 
-
     searchCall(keywords, home);
-	
-
-	getCenter(home);
-	buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first);
-
+	buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first,home);
 }
 
+// use Google Maps Geocode to figure out the long lat for the serch center
 function getCenter(home) {
 	var centerLocation = home;
 
@@ -122,6 +121,7 @@ function getCenter(home) {
 	});
 }
 
+// use the long lat to move the map to the new center and add a marker
 function reCenter(lat, long) {
 	var center = new google.maps.LatLng(lat, long);
 	map.panTo(center);
@@ -136,25 +136,27 @@ function reCenter(lat, long) {
 	});
 }
 
+// center the home page map
 function reCenter2(lat, long) {
 	var center = new google.maps.LatLng(lat, long);
 	map2.panTo(center);
 }
 
+// build out the results from the search at indeed.
+function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first,home) {
 
-function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,first) {
-	
 	var searchKey =searchKeyword;
 	var searchLoc = searchLocation;
 	var lim = limit;
 	var resultsNumber = resultsnum;
 	var pagenum = pageNumber;
 	var initialSearch = first;
+	var center = home;
 
-	console.log("Before buttons added >>> Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
+	getCenter(center);
 
 	var queryURL = "http://api.indeed.com/ads/apisearch?publisher=8023780673544955&format=json"+searchKey+searchLoc+lim+resultsNumber+"&v=2";
-	console.log('queryURL: '+queryURL);
+	//console.log('queryURL: '+queryURL);
 
 	$.ajax({
 		url: queryURL,
@@ -183,7 +185,7 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 			var link = results[i].url;
 			var jobKey = results[i].jobkey;
 
-			$("#resultsList").append("<div class=\"searchResult\" id="+jobKey+"><h2><a href="+link+" target=\"_blank\">" + jobTitle + "</a></h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div>");
+			$("#resultsList").append("<a href="+link+" target=\"_blank\" ><div class=\"searchResult\" id="+jobKey+"><h2>" + jobTitle + "</h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div></a>");
 
 			var secondURL = 'http://api.indeed.com/ads/apigetjobs?publisher=8023780673544955&jobkeys='+jobKey+'&format=json&v=2';
 
@@ -194,6 +196,7 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 			    dataType: 'jsonp'
 			})
 			.done(function(response) {
+				//console.log('inner respsonse:');
 				//console.log(response);
 				var long = response.results[0].longitude;
 				var lat = response.results[0].latitude;
@@ -202,15 +205,10 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 				var link = response.results[0].url;
 				var cCompany = response.results[0].company;
 				var snippet = response.results[0].snippet;
-
-				//$("#"+jobKey).append("<p>" + lat +", "+ long + "</p>");
-				$("#"+jobKey).attr('data-lat', lat);
-				$("#"+jobKey).attr('data-long', long);
-				$("#"+jobKey).attr('data-company', jobTitle);
 			
 				var myLatlng = new google.maps.LatLng(lat,long);
 							  
-				allMarkers = new google.maps.Marker({
+				var allMarkers = new google.maps.Marker({
 					position: myLatlng,
 					map: map,
 					icon: 'assets/images/markerIcon.png',
@@ -223,7 +221,7 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 										'</div>'+
 										'<h3 id="firstHeading" class="firstHeading">'+jobTitle+'</h3>'+
 										'<div id="bodyContent">'+
-											'<p><b>'+company+'</b></p>'+
+											'<p><b>'+cCompany+'</b></p>'+
 											'<p>'+snippet+'</p> '+
 										'</div>'+
 									'</div>';
@@ -248,47 +246,49 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 				google.maps.event.addListener(allMarkers, 'mouseout', function() {
 					infowindow.close(map,this);
 				});
+				
+				console.log ('allmarkers:');
+				console.log (allMarkers);
 
 			});			
 		}
+		
 
 		if ( Math.ceil(numResults / 10) > pagenum ){
 			$("#resultsList").append("<button type=\"button\" class=\"btn btn-default center-block\" id=\"nextPage\">Next 10 <span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span></button>");
 			$('#nextPage').click(function(){
+				//initMap();
+				
 				if (initialSearch) {
 					var start = '&start=';
 					initialSearch = false;
 					pagenum++;
-					console.log("Next Page first: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
-					//getCenter(searchLoc);
-					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,initialSearch);
+					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,initialSearch,center);
 				} else {
 					var start = '&start=';
 					pagenum++;
 					resultsNumber = resultsNumber + 10;
-					console.log("Next Page after first: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
-					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,initialSearch);				
+					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,initialSearch,center);				
 				}
-			});	
+			});
 		}
 
 		if ( pagenum > 1 ){
 			$("#resultsList").append("<button type=\"button\" class=\"btn btn-default center-block\" id=\"previousPage\"><span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span> Previous 10</button>");
 			$('#previousPage').click(function(){
+				//initMap();
+				getCenter(center);
 				if (pagenum == 2) {
 					var limit = "&limit=";
 					first = true;
 					resultsNumber = 10;
 					pagenum--;
-					console.log("Previous page from page 2: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
-					//getCenter(searchLoc);
-					buildResults(searchKey,searchLoc,limit,resultsNumber,pagenum,first);
+					buildResults(searchKey,searchLoc,limit,resultsNumber,pagenum,first,center);
 				} else {
 					var start = '&start=';
 					pagenum--;
 					resultsNumber = resultsNumber - 10;
-					console.log("Previous page from after 2: Results Number - " + resultsNumber + " Initial Search - " + initialSearch + " pagenum - " + pagenum);
-					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,first);				
+					buildResults(searchKey,searchLoc,start,resultsNumber,pagenum,first,center);				
 				}
 			});	
 		}
@@ -296,7 +296,29 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 	});
 }
 
-//initialSearch();
+function createClick() {
+	$('.recentSearchRow').off().click(function(){
+		//preventDefault();
+		var recentSearchLocation = $(this).data('location');
+		var recentSearchKeyword = $(this).data('keyword');
+
+		//console.log(recentSearchLocation);
+		//console.log(recentSearchKeyword);
+
+		if (recentSearchLocation !== ''){
+			initialSearch(recentSearchKeyword, recentSearchLocation);
+			$('#keywords').val('');
+			$('#location').val('');
+			$('.navbar').show();
+			$('.results').show();
+			$('#search').hide();
+			$('#map2').hide();
+		} else {
+			alert('Please enter a location.');
+		}
+		
+	});
+}
 
 $('#seeResults').click(function(){
 	var keywords = $('#keywords').val().trim();
@@ -335,6 +357,16 @@ $('#seeResultsNav').click(function(){
 	return false;
 
 });
+
+$('.logoNav').click(function(){
+	location.reload(false);
+});
+
+$('#recentSearch').click(function(){
+	$('#recentSearchBody').toggle();
+});
+
+
 
 //==================================================================
 // Get current Location
@@ -387,7 +419,6 @@ $('#currentLocNav').click(function(){
 
 	var geoSuccess = function(position) {
 		startPos = position;
-		//console.log('Latitude: '+startPos.coords.latitude + 'Logitude: '+startPos.coords.longitude);
 		var latlong = startPos.coords.latitude+","+startPos.coords.longitude;
 		var geoRequestURL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latlong+'&key=AIzaSyBOo3mntkfMMomnO0V0P6Mt4bQ3vMUUWIw';
 
