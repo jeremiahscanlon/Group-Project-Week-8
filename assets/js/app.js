@@ -185,7 +185,7 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 			var link = results[i].url;
 			var jobKey = results[i].jobkey;
 
-			$("#resultsList").append("<a href="+link+" target=\"_blank\"><div class=\"searchResult\" id="+jobKey+"><h2>" + jobTitle + "</h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div></a>");
+			$("#resultsList").append("<a href="+link+" target=\"_blank\" ><div class=\"searchResult\" id="+jobKey+"><h2>" + jobTitle + "</h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div></a>");
 
 			var secondURL = 'http://api.indeed.com/ads/apigetjobs?publisher=8023780673544955&jobkeys='+jobKey+'&format=json&v=2';
 
@@ -297,8 +297,26 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 }
 
 function createClick() {
-	$('.recentSearchRow').click(function(){
-		console.log('you clicked the thing.')
+	$('.recentSearchRow').off().click(function(){
+		//preventDefault();
+		var recentSearchLocation = $(this).data('location');
+		var recentSearchKeyword = $(this).data('keyword');
+
+		//console.log(recentSearchLocation);
+		//console.log(recentSearchKeyword);
+
+		if (recentSearchLocation !== ''){
+			initialSearch(recentSearchKeyword, recentSearchLocation);
+			$('#keywords').val('');
+			$('#location').val('');
+			$('.navbar').show();
+			$('.results').show();
+			$('#search').hide();
+			$('#map2').hide();
+		} else {
+			alert('Please enter a location.');
+		}
+		
 	});
 }
 
