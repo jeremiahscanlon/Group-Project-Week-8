@@ -315,7 +315,7 @@ function createClick() {
 			$('#search').hide();
 			$('#map2').hide();
 		} else {
-			alert('Please enter a location.');
+			$('#myModal').modal('show');
 		}
 		
 	});
@@ -334,7 +334,7 @@ $('#seeResults').click(function(){
 		$('#search').hide();
 		$('#map2').hide();
 	} else {
-		alert('Please enter a location.');
+		$('#myModal').modal('show');
 	}
 
 	// Don't refresh the page!
@@ -351,7 +351,7 @@ $('#seeResultsNav').click(function(){
 		$('#keywords').val('');
 		$('#location').val('');
 	} else {
-		alert('Please enter a location.');
+		$('#myModal').modal('show');
 	}
 
 	// Don't refresh the page!
