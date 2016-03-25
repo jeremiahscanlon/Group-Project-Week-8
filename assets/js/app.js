@@ -186,6 +186,7 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 			var jobKey = results[i].jobkey;
 
 			$("#resultsList").append("<a href="+link+" target=\"_blank\" ><div class=\"searchResult\" id="+jobKey+"><h2>" + jobTitle + "</h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></div></a>");
+			//$("#resultsList").append("<div class=\"searchResult\" id="+jobKey+"><a href="+link+" target=\"_blank\" ><h2>" + jobTitle + "</h2><p>" + company + " - " + location + "</p><p>" + snippet + "</p></a></div>");
 
 			var secondURL = 'http://api.indeed.com/ads/apigetjobs?publisher=8023780673544955&jobkeys='+jobKey+'&format=json&v=2';
 
@@ -234,7 +235,7 @@ function buildResults(searchKeyword,searchLocation,limit,resultsnum,pageNumber,f
 
 				google.maps.event.addListener(allMarkers, 'click', function() {
 					infowindow.open(map,this);
-						$('#' + jobKey).addClass('clicked').siblings().removeClass('clicked');
+						$('#' + jobKey).addClass('clicked').parent().siblings().children().removeClass('clicked');
 						$('.resultsarea').scrollTop(0);
 						$('.resultsarea').animate({
 							scrollTop: $('#' + jobKey).position().top - 25 }, 500);
@@ -314,7 +315,7 @@ function createClick() {
 			$('#search').hide();
 			$('#map2').hide();
 		} else {
-			alert('Please enter a location.');
+			$('#myModal').modal('show');
 		}
 		
 	});
@@ -333,7 +334,7 @@ $('#seeResults').click(function(){
 		$('#search').hide();
 		$('#map2').hide();
 	} else {
-		alert('Please enter a location.');
+		$('#myModal').modal('show');
 	}
 
 	// Don't refresh the page!
@@ -350,7 +351,7 @@ $('#seeResultsNav').click(function(){
 		$('#keywords').val('');
 		$('#location').val('');
 	} else {
-		alert('Please enter a location.');
+		$('#myModal').modal('show');
 	}
 
 	// Don't refresh the page!

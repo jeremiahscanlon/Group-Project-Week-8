@@ -9,6 +9,48 @@ html, body {
 body {
 }
 
+.modal-content{
+	border-color: #000;
+	margin-top: 100px;
+}
+
+.modal-header {
+	background-color: #00aeff;
+	border-color: #00aeff;
+	border-radius: 5px 5px 0px 0px;
+}
+
+.modal-title {
+	color: #fff;
+	font-size: 2.5em;
+	font-weight: 700; 
+}
+
+.modal-body {
+	border: none;
+}
+
+.modalText {
+	color: #000;
+	font-size: 1.5em;
+}
+
+.modalBtn {
+	background-color: #00aeef;
+	border-color: #00aeef;
+	color: #fff;
+}
+
+.modalBtn:hover {
+	background-color: #666666;
+	border-color: #f5f5f5;
+	color: #fff;
+}
+
+.modal-footer {
+	border-top: none; 
+}
+
 #map2 {
 	height: 100%;
 	width: 100%;
